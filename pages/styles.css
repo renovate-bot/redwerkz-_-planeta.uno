@@ -52,5 +52,19 @@ a {
 }
 
 article code {
-  font-family: 'IBM Plex Mono', monospace;
+}
+
+h1 {
+	font-family: 'IBM Plex Mono', monospace;
+  color: red;
+  z-index: 1;
+  font-weight: 900;
+}
+
+canvas {
+  z-index: 0;
+}
+
+.nextra-nav-container {
+	visibility: hidden;
 }

@@ -1,19 +1,15 @@
 import { useRouter } from 'next/router'
 
 const Logo = ({ height }) => (
-  <svg height={height} viewBox='0 0 70 70' fill='none'>
-    <circle cx='35' cy='35' r='35' fill='currentColor' />
+  <svg height={height} viewBox='0 0 2 2'>
+    <circle cx='1' cy='1' r='1' />
   </svg>
 )
 
 export default {
-  projectLink: 'https://github.com/shuding/cobe',
-  docsRepositoryBase: 'https://github.com/shuding/cobe/blob/main/website/pages',
-  search: true,
+  projectLink: 'https://github.com/redwerkz/planeta.uno',
   titleSuffix: '',
-  unstable_flexsearch: true,
   unstable_faviconGlyph: '⚫️',
-  floatTOC: true,
   logo: () => {
     const { route } = useRouter()
     return (
@@ -22,10 +18,10 @@ export default {
         {route === '/' ? null : (
           <span
             className='mx-2 font-extrabold hidden md:inline select-none'
-            title='COBE'
+            title=' Time is Up!'
             style={{ whiteSpace: 'nowrap' }}
           >
-            COBE
+            Time is Up!
           </span>
         )}
       </>
@@ -37,8 +33,6 @@ export default {
 
     return (
       <>
-        <meta name='msapplication-TileColor' content='#ffffff' />
-        <meta httpEquiv='Content-Language' content='en' />
         <meta
           name='description'
           content={meta.description || 'A 5kB WebGL globe library.'}
@@ -48,45 +42,12 @@ export default {
           content={meta.description || 'A 5kB WebGL globe library.'}
         />
         <meta name='twitter:card' content='summary_large_image' />
-        <meta name='twitter:site' content='@shuding_' />
+        <meta name='twitter:site' content='@redwerkz' />
         <meta name='twitter:image' content={ogImage} />
         <meta name='og:title' content={title ? title + ' – COBE' : 'COBE'} />
         <meta name='og:image' content={ogImage} />
         <meta name='apple-mobile-web-app-title' content='COBE' />
       </>
     )
-  },
-  footerText: ({ locale }) => {
-    return (
-      <p className='no-underline text-current font-semibold'>
-        Made by{' '}
-        <a
-          href='https://twitter.com/shuding_'
-          target='_blank'
-          rel='noopener'
-          className='no-underline font-semibold'
-        >
-          @shuding_
-        </a>
-        , deployed on{' '}
-        <a
-          href='https://vercel.com/?utm_source=cobe'
-          target='_blank'
-          rel='noopener'
-          className='no-underline font-semibold'
-        >
-          Vercel
-        </a>
-        .
-      </p>
-    )
-  },
-  footerEditLink: () => {
-    const { route } = useRouter()
-    if (route.includes('/showcases/')) {
-      return null
-    }
-    return 'Edit this page on GitHub'
-  },
-  gitTimestamp: false,
+  }
 }

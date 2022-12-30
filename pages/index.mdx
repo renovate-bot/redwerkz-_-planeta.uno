@@ -4,23 +4,12 @@ title: COBE
 
 import createGlobe from "cobe";
 import { useEffect, useRef } from "react";
-import { useSpring } from 'react-spring';
+// import { useSpring } from 'react-spring';
 
 export function Cobe() {
   const canvasRef = useRef();
-  const pointerInteracting = useRef(null);
-  const pointerInteractionMovement = useRef(0);
-  const [{ r }, api] = useSpring(() => ({
-    r: 0,
-    config: {
-      mass: 1,
-      tension: 280,
-      friction: 40,
-      precision: 0.001,
-    },
-  }));
   useEffect(() => {
-    let phi = 0;
+    let phi = 3;
     let width = 0;
     const onResize = () => canvasRef.current && (width = canvasRef.current.offsetWidth)
     window.addEventListener('resize', onResize)
@@ -30,22 +19,22 @@ export function Cobe() {
       width: width * 2,
       height: width * 2,
       phi: 0,
-      theta: 0.2,
-      dark: 1.1,
-      diffuse: 3,
-      mapSamples: 16000,
-      mapBrightness: 1.8,
-      mapBaseBrightness: .05,
-      baseColor: [1.1, 1.1, 1.1],
+      theta: 0.25,
+      dark: 1,
+      diffuse: 3.5,
+      mapSamples: 12000,
+      mapBrightness: 1.2,
+      baseColor: [1, 1, 1],
       markerColor: [251 / 255, 100 / 255, 21 / 255],
-      glowColor: [1.1, 1.1, 1.1],
-      markers: [],
-      opacity: .7,
+      glowColor: [1.2, 1.2, 1.2],
+      markers: [
+		{ location: [48.597512, 7.769092], size: 0.1 }
+	  ],
       onRender: (state) => {
         // Called on every animation frame.
         // `state` will be an empty object, return updated params.
-        state.phi = phi + r.get()
-        phi += 0.005
+        state.phi = phi
+        phi += 0.01
         state.width = width * 2
         state.height = width * 2
       }
@@ -55,7 +44,7 @@ export function Cobe() {
   }, [])
   return <div style={{
     width: '100%',
-    maxWidth: 600,
+    maxWidth: 800,
     aspectRatio: 1,
     margin: 'auto',
     position: 'relative',
@@ -65,86 +54,33 @@ export function Cobe() {
       fontWeight: 700,
       top: '50%',
       transform: 'translateY(-50%)',
-      zIndex: 1, 
+      zIndex: 1,
       textAlign: 'center',
       color: '#fff',
       pointerEvents: 'none',
       userSelect: 'none',
-      position: 'absolute',
-      mixBlendMode: 'difference'
+      position: 'absolute'
     }}>
-      <h1 style={{ 
+      <h1 style={{
         fontSize: 'min(9vw,3.2em)',
-        letterSpacing: '.3em',
-        textIndent: '.3em',
         margin: 'auto',
-      }}>COBE</h1>
-      <span style={{ fontSize: '1.2em' }}>5kB WebGL Globe</span>
+      }}>Time is Up!</h1>
+      <span style={{ fontSize: '1em' }}>Artenvielfalt, Hitze und Tintenfische in Europa</span>
     </div>
-    <canvas
+        <canvas
       ref={canvasRef}
-      onPointerDown={(e) => {
-        pointerInteracting.current =
-          e.clientX - pointerInteractionMovement.current;
-        canvasRef.current.style.cursor = 'grabbing';
-      }}
-      onPointerUp={() => {
-        pointerInteracting.current = null;
-        canvasRef.current.style.cursor = 'grab';
-      }}
-      onPointerOut={() => {
-        pointerInteracting.current = null;
-        canvasRef.current.style.cursor = 'grab';
-      }}
-      onMouseMove={(e) => {
-        if (pointerInteracting.current !== null) {
-          const delta = e.clientX - pointerInteracting.current;
-          pointerInteractionMovement.current = delta;
-          api.start({
-            r: delta / 200,
-          });
-        }
-      }}
-      onTouchMove={(e) => {
-        if (pointerInteracting.current !== null && e.touches[0]) {
-          const delta = e.touches[0].clientX - pointerInteracting.current;
-          pointerInteractionMovement.current = delta;
-          api.start({
-            r: delta / 100,
-          });
-        }
-      }}
       style={{
         width: '100%',
         height: '100%',
-        cursor: 'grab',
         contain: 'layout paint size',
         opacity: 0,
         transition: 'opacity 1s ease',
-        borderRadius: '50%',
       }}
     />
   </div>
 }
 
 <Cobe/>
-
-import Link from 'next/link'
-
-<div style={{ textAlign: 'center' }}>
-  <div className="inline-flex justify-center cta-container">
-    <Link href="/docs">
-      <a className="cta" draggable="false">Get Started</a>
-    </Link>
-    <a href="https://cobe-playground.vercel.app" className="cta" draggable="false">Playground</a>
-  </div>
-  <div style={{ marginTop: '2rem' }}/>
-  <a href="https://twitter.com/shuding_/status/1475916082875666441" target="_blank" style={{
-    color: 'inherit',
-    opacity: .5,
-    fontSize: 14
-  }}>How the library was created →</a>
-</div>
 
 <style jsx global>{`
 body {
@@ -155,7 +91,7 @@ body {
     ),
     fixed
       repeating-radial-gradient(
-        circle at 50% min(calc(50vw + 3.5rem), calc(300px + 5rem)),
+        circle at 50% min(calc(50vw + 3.5rem), calc(400px + 5rem)),
         #f5f5f5 0,
         #fff 40px
       );
@@ -168,7 +104,7 @@ body {
   ),
   fixed
     repeating-radial-gradient(
-      circle at 50% min(calc(50vw + 3.5rem), calc(300px + 5rem)),
+      circle at 50% min(calc(50vw + 3.5rem), calc(400px + 5rem)),
       #050505 0,
       #000 40px
     );

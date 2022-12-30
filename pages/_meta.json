@@ -6,7 +6,7 @@
     "theme": {
       "sidebar": false,
       "toc": false,
-      "footer": true,
+      "footer": false,
       "pagination": true,
       "breadcrumb": false
     }
