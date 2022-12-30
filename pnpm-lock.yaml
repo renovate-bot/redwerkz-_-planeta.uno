@@ -1,13 +1,13 @@
 lockfileVersion: 5.4
 
 specifiers:
-  cobe: ^0.6.3
-  next: ^12.1.6-canary.6
+  cobe: 0.6.3
+  next: 12.3.4
   nextra: 2.0.1
   nextra-theme-docs: 2.0.0-alpha.59
-  react: ^18.0.0
-  react-dom: ^18.0.0
-  react-spring: ^9.4.4
+  react: 18.2.0
+  react-dom: 18.2.0
+  react-spring: 9.6.1
 
 dependencies:
   cobe: 0.6.3
